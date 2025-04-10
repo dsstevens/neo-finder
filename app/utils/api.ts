@@ -3,13 +3,13 @@ import axios from 'axios';
 const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
-interface NeoObject {
+export interface NeoObject {
     name: string; // near_earth_objects[date].name
     diameter: {
         average: number;
         min: number;
         max: number;
-    }; // TODO !need to avg the min and max in feet! // near_earth_objects[date].estimated_diameter.feet
+    }; // TODO !need to refactor avg logic into helper fn // near_earth_objects[date].estimated_diameter.feet
     velocity: number; //miles per hour // near_earth_objects[date].close_approach_data[0].relative_velocity.miles_per_hour
     missDistance: number; //miles // near_earth_objects[date].close_approach_data[0].miss_distance.miles
     hazardous: boolean;
@@ -37,6 +37,7 @@ interface NeoResponse {
         }>;
     };
 }
+
 export const fetchNeos = async (date: string = new Date().toISOString().split('T')[0]) : Promise<NeoObject[]> => {
     try {
         const response = await axios.get<NeoResponse>(API_URL, {
@@ -46,6 +47,9 @@ export const fetchNeos = async (date: string = new Date().toISOString().split('T
                 api_key: API_KEY
             }
         });
+        console.log('API Response:', JSON.stringify(response.data, null, 2));
+        console.log('Date used:', date);
+
         return response.data.near_earth_objects[date].map(neo => ({
             name: neo.name,
             diameter: {
