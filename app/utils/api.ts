@@ -38,19 +38,24 @@ interface NeoResponse {
     };
 }
 
-export const fetchNeos = async (date: string = new Date().toISOString().split('T')[0]) : Promise<NeoObject[]> => {
+const formatDateForApi = (date: Date): string => {
+    return date.toISOString().split('T')[0];
+};
+export const fetchNeos = async (date: Date): Promise<NeoObject[]> => {
+    const formattedDate = formatDateForApi(date);
+
     try {
         const response = await axios.get<NeoResponse>(API_URL, {
             params: {
-                start_date: date,
-                end_date: date,
+                start_date: formattedDate,
+                end_date: formattedDate,
                 api_key: API_KEY
             }
         });
         console.log('API Response:', JSON.stringify(response.data, null, 2));
         console.log('Date used:', date);
 
-        return response.data.near_earth_objects[date].map(neo => ({
+        return response.data.near_earth_objects[formattedDate].map(neo => ({
             name: neo.name,
             diameter: {
                 min: neo.estimated_diameter.feet.estimated_diameter_min,
