@@ -4,14 +4,14 @@ const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
 export interface NeoObject {
-    name: string; // near_earth_objects[date].name
+    name: string;
     diameter: {
         average: number;
         min: number;
         max: number;
-    }; // TODO !need to refactor avg logic into helper fn // near_earth_objects[date].estimated_diameter.feet
-    velocity: number; //miles per hour // near_earth_objects[date].close_approach_data[0].relative_velocity.miles_per_hour
-    missDistance: number; //miles // near_earth_objects[date].close_approach_data[0].miss_distance.miles
+    }; // TODO refactor avg logic into helper fn
+    velocity: number;
+    missDistance: number;
     hazardous: boolean;
 }
 

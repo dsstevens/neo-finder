@@ -19,8 +19,7 @@ export default function Index() {
   const loadNeos = async (date: Date) => {
     try {
       setLoading(true);
-      const USE_MOCK_DATA = true;
-      // const formattedDate = date.toISOString().split('T')[0];
+      const USE_MOCK_DATA = false;
       const data = USE_MOCK_DATA ? mockNeos : await fetchNeos(date);
       setNeos(data);
     } catch (err) {
@@ -151,8 +150,9 @@ const styles = StyleSheet.create({
     borderTopColor: '#e0e0e0',
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+    gap: 16
   },
   pickerRow: {
     flexDirection: 'row',
@@ -160,8 +160,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   datePicker: {
-    flex: 1,
-    height: 120,
+    // flex: 1,
+    // height: 120,
+    width: 120
   },
   timePicker: {
     height: 100,
