@@ -5,6 +5,7 @@ This is a React Native application made in [Expo](https://expo.dev/) with `creat
 
 This app uses NASA's
 NeoWs (Near Earth Object Web Service) to display information and details about Near Earth Objects(NEOs) including its name, diameter, velocity, miss distance and whether the object is hazardous.
+![neofinder](https://github.com/user-attachments/assets/faa537ee-34b5-4b3a-b809-3e3b171d37ee)
 
 ## 🌌Installation Guide🌌
 You will need to `git clone` this application down and have an Expo environment and API key.
