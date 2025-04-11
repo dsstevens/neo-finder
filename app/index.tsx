@@ -19,7 +19,7 @@ export default function Index() {
   const loadNeos = async (date: Date) => {
     try {
       setLoading(true);
-      const USE_MOCK_DATA = true;
+      const USE_MOCK_DATA = false;
       const data = USE_MOCK_DATA ? mockNeos : await fetchNeos(date);
       setNeos(data);
     } catch (err) {
