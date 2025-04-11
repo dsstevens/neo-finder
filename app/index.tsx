@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { fetchNeos } from './utils/api';
 import { NeoObject } from './utils/api';
+import { mockNeos } from './utils/mockData';
 
 export default function Index() {
   const [neos, setNeos] = useState<NeoObject[]>([]);
@@ -14,7 +15,8 @@ export default function Index() {
 
   const loadNeos = async () => {
     try {
-      const data = await fetchNeos();
+      const USE_MOCK_DATA = true;
+      const data = USE_MOCK_DATA ? mockNeos : await fetchNeos();
       setNeos(data);
     } catch (err) {
       setError('Failed to load NEO data');
